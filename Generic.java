@@ -1,4 +1,3 @@
-package Assignment1;
 
 /* Class to hold the statements and the confidence of the statements
  * 25/02/2024 

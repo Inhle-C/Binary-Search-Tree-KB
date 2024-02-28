@@ -1,4 +1,3 @@
-package Assignment1; 
 
 /* Class with the main method to run the whole program 
  * and let users choose what they wanna do
@@ -13,10 +12,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
-public class GenericMenu 
+public class GenericsKbArrayApp 
 {
 
-	private static Generic [] genericArr= new Generic[50005];
+	private static Generic [] genericArr= new Generic[50015];
 	private static int len=0;
 	
 	public static void readFile(String fName) 
@@ -65,7 +64,7 @@ public class GenericMenu
 
 		int found= -1;
 		int count=0;
-		while(count<= len)//loop through the arrary
+		while(count< len)//loop through the arrary
 		{
 			if (term.equalsIgnoreCase(genericArr[count].getTerm()))
 			{
@@ -82,9 +81,8 @@ public class GenericMenu
 
 		int found= -1;
 		int count=0;
-		while(count<= len)//loop through the arrary
+		while(count<len)//loop through the arrary
 		{
-			System.out.println(count);
 			if (term.equalsIgnoreCase(genericArr[count].getTerm()))
 			{	
 				if (sentence.equalsIgnoreCase(genericArr[count].getSentence()))
@@ -94,9 +92,11 @@ public class GenericMenu
 			}
 			count++;
 		}
+		
 		return found;
 	}
 	
+
 	public static void main(String[] args) 
 	{
 		
@@ -118,15 +118,19 @@ public class GenericMenu
 				System.out.print("\nEnter the term: ");
 				keyboard.nextLine(); //throw away extra line
 				String searchTerm2= keyboard.nextLine();
-				System.out.print("Enter the statement to search: ");
+				System.out.print("Enter the statement: ");
 				String searchStatement2= keyboard.nextLine();
 				System.out.print("Enter the confidence score: ");
-				String confidence2= keyboard.nextLine(); //file?
-				int pos2= search(searchTerm2, searchStatement2);// COME BACK
-				if (pos2 >=0) //if the term exists in the knowledge base
+				String confidence2= keyboard.nextLine(); 
+				int pos2= search(searchTerm2);
+				if (pos2 >=0) //if the term exists in the knowledge base to replace it
 				{
-				 genericArr[pos2]= new Generic(searchTerm2,searchStatement2, confidence2);
+				  genericArr[pos2]= new Generic(searchTerm2,searchStatement2, confidence2);
 				}
+				else
+				  genericArr[len]= new Generic(searchTerm2, searchStatement2, confidence2);
+					
+				System.out.println("Statement for term " + searchTerm2 + " has been updated");
 				
 					break;			
 			case 3: //searching for an item
@@ -138,6 +142,9 @@ public class GenericMenu
 				{
 				 System.out.println("\nStatement found: " +genericArr[pos].getSentence() + " (Confidence score: " + genericArr[pos].getConfidence() + ")");
 				}
+				else
+					System.out.println("Statement does not exist in the file");
+				
 					break;
 			case 4: //search by term and sentence
 				System.out.print("\nEnter the term: ");
@@ -150,6 +157,8 @@ public class GenericMenu
 				{
 				 System.out.println("\nThe statement was found and has a confidence score of " + genericArr[pos].getConfidence()+ ".");
 				}
+				else
+					System.out.println("Statement does not exist in the file");
 				
 					break;
 			default:
@@ -161,7 +170,7 @@ public class GenericMenu
 			menuAns= keyboard.nextInt();
 		}
 		
-		writeToFile();
+		// writeToFile(); if we need to save all this to files when we are done
 		keyboard.close();
 	}
 	
