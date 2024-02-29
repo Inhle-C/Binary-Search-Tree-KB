@@ -1,5 +1,6 @@
 
-/*Node for the Binary tree
+/**
+ * Node for the Binary tree
  * 
  * @author Inhle Cele & CSC2001F Jan Buys notes- Binary trees
  * @version 1.0

@@ -1,5 +1,6 @@
 
-/* Class with the main method to run the whole program 
+/**
+ * Class with the main method to run the whole program 
  * and let users choose what they wanna do
  * 
  * @author Inhle Cele

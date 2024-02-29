@@ -1,5 +1,6 @@
 
-/* Class with the main method to run the whole program 
+/** 
+ * Class with the main method to run the whole program 
  * and let users choose what they wanna do but using Binary search tree database
  * 
  * @author Inhle Cele
@@ -62,6 +63,7 @@ public class GenericsKbBSTApp
 				readFile(fileName);//code block
 				break;
 			case 2: //add a new statement to the database
+				// doesnt update statements?
 				System.out.print("\nEnter the term: ");
 				keyboard.nextLine(); //throw away extra line
 				String searchTerm2= keyboard.nextLine();
@@ -113,7 +115,7 @@ public class GenericsKbBSTApp
 		
 		// writeToFile(); if we need to save all this to files when we are done
 		keyboard.close();
-	}
+	} //proper end?
 }
 	
 
