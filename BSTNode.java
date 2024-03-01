@@ -1,5 +1,6 @@
 
-/**Node for the Binary tree
+/**
+ * Class to create the node for the Binary Search tree
  * 
  * @author Inhle Cele and CSC2001F notes- Binary trees (Prof. Jan Buys)
  * @version 1.0

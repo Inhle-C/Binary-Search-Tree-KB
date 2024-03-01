@@ -1,16 +1,22 @@
 
 /**
- * Node for the Binary tree
+ * Class to create and store Binary Search trees
  * 
- * @author Inhle Cele & CSC2001F Jan Buys notes- Binary trees
+ * @author Inhle Cele ;CSC2001F Jan Buys notes- Binary trees
  * @version 1.0
  * @since 25-02-2024 
 */
-
 public class BinarySearchTreeKB 
 {
+	/**
+	 * the root/beggining node of the tree
+	 */
 	BSTNode root = null;
 	
+	/**
+	 * adds a node to the binary search tree in the specified order its meant to be in
+	 * @param data Node we want to add to the database/tree
+	 */
 	public void addNode(Generic data) 
 	{
 		BSTNode<Generic> newNode= new BSTNode<Generic>(data);
@@ -48,6 +54,10 @@ public class BinarySearchTreeKB
 		}
 	}
 	
+	/**
+	 * Gives the nodes of the tree in alphabetical order aka from lowest to highest
+	 * @param focus Node we are starting the traverse at - usually gonna be root
+	 */
 	public void traverseInorder(BSTNode<Generic> focus) //check for myself to make sure code is working
 	{
 		if (focus!= null)
@@ -58,6 +68,12 @@ public class BinarySearchTreeKB
 		}
 	}
 	
+	/**
+	 * Searches for a specific term to see if it exists in the tree from just the term alone
+	 * @author CSC2001 notes (Jan Buys)
+	 * @param focus The term of the node we are looking for
+	 * @return the node if found, null if nothing is found
+	 */
 	public BSTNode<Generic> search(String focus) 
 	{
 		
@@ -67,6 +83,14 @@ public class BinarySearchTreeKB
 			return search(focus, root);
 	}
 	
+	/**
+	 * Used in the search(String focus) and is used to compare the term of the node to the string
+	 * 
+	 * @author CSC2001 notes (Jan Buys)
+	 * @param focus The term we are looking for
+	 * @param node the node we are comparing to the term to see if its equal
+	 * @return the node if found, null if nothing is found
+	 */
 	public BSTNode<Generic> search(String focus, BSTNode<Generic> node) 
 	{
 		int cmp= node.compareTo(focus);
@@ -79,6 +103,14 @@ public class BinarySearchTreeKB
 
 	}
 	
+	/**
+	 * Searches for a specific term and statement to see if it exists in the tree from just the Strings alone
+	 * 
+	 * @author CSC2001 notes (Jan Buys)
+	 * @param focusT The term we are looking for
+	 * @param focuSen The statement we are looking for
+	 * @return the node if found, null if nothing is found
+	 */
 	public BSTNode<Generic> search(String focusT, String focuSen) 
 	{
 		
@@ -87,7 +119,15 @@ public class BinarySearchTreeKB
 		else 
 			return search(focusT,focuSen, root);
 	}
-	
+	/**
+	 * Used in the search(String focusT, foucSen) and is used to compare the term and sentence of the node to the Strings
+	 * 
+	 * @author CSC2001 notes (Jan Buys)
+	 * @param focus The term we are looking for
+	 * @param sentence The sentence we are looking for
+	 * @param node The node we are comparing
+	 * @return the node if found, null if nothing is found
+	 */
 	public BSTNode<Generic> search(String focus,String sentence,BSTNode<Generic> node) 
 	{
 		int cmp1= node.compareTo(focus);

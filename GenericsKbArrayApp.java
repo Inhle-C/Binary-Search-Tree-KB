@@ -1,24 +1,34 @@
-
-/**
- * Class with the main method to run the whole program 
- * and let users choose what they wanna do
- * 
- * @author Inhle Cele
- * @version 1.0
- * @since 25-02-2024 
-*/
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
+
+/**
+ * Class with the main method to run the whole program 
+ * but using an array to store the DB
+ * 
+ * @author Inhle Cele
+ * @version 1.0
+ * @since 25-02-2024 
+*/
 public class GenericsKbArrayApp 
 {
-
+	/**
+	 * Creates the array that we'll be using to store all the items
+	 */
 	private static Generic [] genericArr= new Generic[50015];
+	
+	/**
+	 * stores the legth of the array, intially 0 as empty
+	 */
 	private static int len=0;
 	
+	/**
+	 * Reads in each line from a file with specified name in the folder and 
+	 * puts that information into the array
+	 * @param fName The name of the file we are going to read in
+	 */
 	public static void readFile(String fName) 
 	{
 	 Scanner fileIn = null;
@@ -44,12 +54,15 @@ public class GenericsKbArrayApp
 	  }	
 	}
 	
+	/**
+	 * All updates and changes made by the user and added to the array are now stored into the file
+	 */
 	public static void writeToFile()
 	{
 		PrintWriter pw= null;
 		try 
 		{
-			pw = new PrintWriter(new FileOutputStream("GenericsKB.txt", true));
+			pw = new PrintWriter(new FileOutputStream("GenericsKB.txt", true)); //let user chose the file they used?
 			for (int j = 0; j < genericArr.length; j++)
 			{
 				pw.println(genericArr[j].toString()); //if not in file just write/add it to the end
@@ -60,6 +73,11 @@ public class GenericsKbArrayApp
 		}	
 	}
 	
+	/**
+	 * Searches for a specific term to see if it exists in the array from just the term alone
+	 * @param term The term of the item we are looking for
+	 * @return the position in the array that the term was found if it exist in the file and -1 if statement not found
+	 */
 	public static int search(String term)
 	{
 
@@ -77,6 +95,12 @@ public class GenericsKbArrayApp
 		return found;
 	}
 	
+	/**
+	 * Searches for a specific term and statement to see if it exists in the array from just the Strings alone
+	 * @param term The term we are looking for
+	 * @param sentence The statement we are looking for
+	 * @return the position in the array that the term was found if it exist in the file and -1 if statement not found
+	 */
 	public static int search(String term, String sentence) 
 	{
 
@@ -96,8 +120,13 @@ public class GenericsKbArrayApp
 		
 		return found;
 	}
-	
 
+
+	/**
+	 * The main method of the app that allows user to choose whether they'd like to
+	 * add new statements to the knowledge base,  Serach for/Display information from the knowledge base
+	 * @param args The command line arguments.
+	 */
 	public static void main(String[] args) 
 	{
 		

@@ -1,4 +1,11 @@
 
+
+import java.util.Scanner;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+
 /** 
  * Class with the main method to run the whole program 
  * and let users choose what they wanna do but using Binary search tree database
@@ -7,17 +14,17 @@
  * @version 1.0
  * @since 27-02-2024 
 */
-
-import java.util.Scanner;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
-
 public class GenericsKbBSTApp 
 {
+	/**
+	 * Creates a Binary Search Tree that we'll be using to store all the items
+	 */
 	private static BinarySearchTreeKB mainTree = new BinarySearchTreeKB();
 	
+	/**
+	 * Reads in each line from a file with specified name in the folder and puts that information into the search tree
+	 * @param fName The name of the file we are going to read in
+	 */
 	public static void readFile(String fName) 
 	{
 	 Scanner fileIn = null;
@@ -42,10 +49,11 @@ public class GenericsKbBSTApp
 	  }	
 	}
 	
-	
-	
-	
-	
+	/**
+	 * The main method of the app that allows user to choose whether they'd like to
+	 * add new statements to the knowledge base,  Serach for/Display information from the knowledge base
+	 * @param args The command line arguments.
+	 */
 	public static void main(String[] args) 
 	{
 		Scanner keyboard= new Scanner(System.in);

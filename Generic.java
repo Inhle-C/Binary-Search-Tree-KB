@@ -10,11 +10,12 @@ public class Generic
 	/**
 	 * Holds the term/word
 	 */
+	private String term;
 	
 	/**
 	 * The sentence or statement associated with the term
 	 */
-	private String term, sentence;
+	private String sentence;
 	/**
 	 * The score in between 0 to 1 showing how confident we are in the statement, where 1 represents complete confidence
 	 */
@@ -69,7 +70,7 @@ public class Generic
 	
 	/**
 	 * Sets the confidence score of the statement
-	 * @param confidnece the given confidence score
+	 * @param confidence the given confidence score
 	 */
 	public void setConfidence(double confidence) {
 		this.confidence = confidence;
