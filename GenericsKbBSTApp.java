@@ -1,6 +1,8 @@
 
-
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -71,7 +73,6 @@ public class GenericsKbBSTApp
 				readFile(fileName);//code block
 				break;
 			case 2: //add a new statement to the database
-				// doesnt update statements?
 				System.out.print("\nEnter the term: ");
 				keyboard.nextLine(); //throw away extra line
 				String searchTerm2= keyboard.nextLine();
@@ -79,8 +80,22 @@ public class GenericsKbBSTApp
 				String searchStatement2= keyboard.nextLine();
 				System.out.print("Enter the confidence score: ");
 				String confidence2= keyboard.nextLine(); 
-				Generic temp2= new Generic(searchTerm2, searchStatement2, confidence2);
-				mainTree.addNode(temp2);					
+				BSTNode<Generic> check= mainTree.search(searchTerm2);
+				if (check!= null)//if the term exists in the knowledge base
+				{
+				  double checkCon =Double.parseDouble(confidence2);
+				  if( checkCon > check.getData().getConfidence()) 
+				  {
+					  check.getData().setTerm(searchTerm2);
+					  check.getData().setConfidence(checkCon);
+					  check.getData().setSentence(searchStatement2);
+				  }
+				}
+				else
+					{		
+					Generic temp2= new Generic(searchTerm2, searchStatement2, confidence2);
+					mainTree.addNode(temp2);
+					}
 				System.out.println("Statement for term " + searchTerm2 + " has been updated");
 				
 					break;			
@@ -121,9 +136,25 @@ public class GenericsKbBSTApp
 			menuAns= keyboard.nextInt();
 		}
 		
-		// writeToFile(); if we need to save all this to files when we are done
+		
 		keyboard.close();
+		String feedback= JOptionPane.showInputDialog("Please type any feedback you may have in the box below");
+		writeToFile(feedback); //if we need to save all this to files when we are done
+		System.exit(0);
 	} //proper end?
+	
+	public static void writeToFile(String F)
+	{
+		PrintWriter pw= null;
+		try 
+		{
+			pw = new PrintWriter(new FileOutputStream("GenericsKbBSTfeedback.txt", true));
+			pw.println(F); 
+			pw.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found");
+		}	
+	}
 }
 	
 
