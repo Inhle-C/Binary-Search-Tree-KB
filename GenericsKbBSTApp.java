@@ -22,14 +22,16 @@ public class GenericsKbBSTApp
 	 * Creates a Binary Search Tree that we'll be using to store all the items
 	 */
 	private static BinarySearchTreeKB mainTree = new BinarySearchTreeKB();
-	
+	private static Scanner fileIn = null;
 	/**
 	 * Reads in each line from a file with specified name in the folder and puts that information into the search tree
 	 * @param fName The name of the file we are going to read in
 	 */
 	public static void readFile(String fName) 
 	{
-	 Scanner fileIn = null;
+	 
+	if (fileIn== null)
+	{
 	  try 
 	  {
 		fileIn= new Scanner(new FileInputStream(fName));
@@ -49,6 +51,41 @@ public class GenericsKbBSTApp
 	  {
 		System.out.println("File not found");
 	  }	
+	}
+	else 
+	{
+		try 
+		  {
+			fileIn= new Scanner(new FileInputStream(fName));
+			while (fileIn.hasNext()) 
+			{
+				String line= fileIn.nextLine();
+				String [] genericDetails = new String[3];
+				genericDetails = line.split("\\t");
+				Generic temp = new Generic(genericDetails[0],genericDetails[1], genericDetails[2]);
+				
+				BSTNode<Generic> exist= mainTree.search(temp.getTerm());
+				if (exist!= null)//if the term exists in the knowledge base
+				{
+				  if (temp.getConfidence()>= exist.getData().getConfidence())
+				  {
+					  exist.getData().setTerm(temp.getTerm());
+					  exist.getData().setConfidence(temp.getConfidence());
+					  exist.getData().setSentence(temp.getSentence());
+				  }
+				}
+				else //if it doesnt
+				mainTree.addNode(temp);
+			} 
+			
+			System.out.println("\nKnowledge base loaded succesfully.");
+			fileIn.close();
+			
+		  } catch (FileNotFoundException f) 
+		  {
+			System.out.println("File not found");
+		  }	
+	}
 	}
 	
 	/**
@@ -84,7 +121,7 @@ public class GenericsKbBSTApp
 				if (check!= null)//if the term exists in the knowledge base
 				{
 				  double checkCon =Double.parseDouble(confidence2);
-				  if( checkCon > check.getData().getConfidence()) 
+				  if( checkCon >= check.getData().getConfidence()) 
 				  {
 					  check.getData().setTerm(searchTerm2);
 					  check.getData().setConfidence(checkCon);

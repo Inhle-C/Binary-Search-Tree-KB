@@ -17,8 +17,8 @@ public class GenericsKbArrayApp
 	/**
 	 * Creates the array that we'll be using to store all the items
 	 */
-	private static Generic [] genericArr= new Generic[50015];
-	
+	private static Generic [] genericArr= new Generic[100000];
+	private static Scanner fileIn = null;
 	/**
 	 * stores the legth of the array, intially 0 as empty
 	 */
@@ -31,7 +31,8 @@ public class GenericsKbArrayApp
 	 */
 	public static void readFile(String fName) 
 	{
-	 Scanner fileIn = null;
+	if (fileIn== null)
+	{
 	  try 
 	  {
 		fileIn= new Scanner(new FileInputStream(fName));
@@ -53,6 +54,41 @@ public class GenericsKbArrayApp
 		System.out.println("File not found");
 	  }	
 	}
+	else
+	{
+		try 
+		  {
+			fileIn= new Scanner(new FileInputStream(fName));
+			while (fileIn.hasNext()) 
+			{
+				
+				String line= fileIn.nextLine();
+				String [] genericDetails = new String[3];
+				genericDetails = line.split("\\t");
+				Generic temp = new Generic(genericDetails[0],genericDetails[1], genericDetails[2]);
+				int pos= search(temp.getTerm());
+				if (pos >=0) //if the term exists in the knowledge base to replace it
+				{
+				  genericArr[pos]= temp;
+				}
+				else
+				  {
+				  genericArr[len]= temp;
+				  genericArr[len]= temp;
+				  len++;
+				  }
+			} 
+			
+			System.out.println("\nKnowledge base loaded succesfully.");
+			fileIn.close();
+			
+		  } catch (FileNotFoundException f) 
+		  {
+			System.out.println("File not found");
+		  }	
+	}
+	}
+	
 	
 	/**
 	 * All updates and changes made by the user and added to the array are now stored into the file
@@ -200,7 +236,7 @@ public class GenericsKbArrayApp
 			menuAns= keyboard.nextInt();
 		}
 		
-		// writeToFile(); if we need to save all this to files when we are done
+		
 		keyboard.close();
 	}
 	
