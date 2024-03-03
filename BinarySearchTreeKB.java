@@ -11,7 +11,7 @@ public class BinarySearchTreeKB
 	/**
 	 * the root/beggining node of the tree
 	 */
-	BSTNode root = null;
+	private BSTNode<Generic> root = null;
 	
 	/**
 	 * adds a node to the binary search tree in the specified order its meant to be in
@@ -21,14 +21,14 @@ public class BinarySearchTreeKB
 	{
 		BSTNode<Generic> newNode= new BSTNode<Generic>(data);
 		
-		if (root== null)
+		if (getRoot()== null)
 		{
-			root=newNode;
+			setRoot(newNode);
 		}
 		else
 		{
-			BSTNode focus= root;
-			BSTNode parent;
+			BSTNode<Generic> focus= getRoot();
+			BSTNode<Generic> parent;
 			
 			while(focus!=null) 
 			{	
@@ -77,10 +77,10 @@ public class BinarySearchTreeKB
 	public BSTNode<Generic> search(String focus) 
 	{
 		
-		if (root==null)
+		if (getRoot()==null)
 			return null;
 		else 
-			return search(focus, root);
+			return search(focus, getRoot());
 	}
 	
 	/**
@@ -114,10 +114,10 @@ public class BinarySearchTreeKB
 	public BSTNode<Generic> search(String focusT, String focuSen) 
 	{
 		
-		if (root==null)
+		if (getRoot()==null)
 			return null;
 		else 
-			return search(focusT,focuSen, root);
+			return search(focusT,focuSen, getRoot());
 	}
 	/**
 	 * Used in the search(String focusT, foucSen) and is used to compare the term and sentence of the node to the Strings
@@ -139,5 +139,13 @@ public class BinarySearchTreeKB
 		else
 			return (node.getRight() == null) ? null : search (focus, sentence,node.getRight());
 
+	}
+
+	public BSTNode<Generic> getRoot() {
+		return root;
+	}
+
+	public void setRoot(BSTNode<Generic> root) {
+		this.root = root;
 	}
 }

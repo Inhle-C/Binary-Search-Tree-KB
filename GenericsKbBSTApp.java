@@ -148,7 +148,7 @@ public class GenericsKbBSTApp
 		PrintWriter pw= null;
 		try 
 		{
-			pw = new PrintWriter(new FileOutputStream("GenericsKbBSTfeedback.txt", true));
+			pw = new PrintWriter(new FileOutputStream("GenericsKbBSTfeedback.txt", true)); //creates new file if doesnt exist
 			pw.println(F); 
 			pw.close();
 		} catch (FileNotFoundException e) {
