@@ -104,7 +104,7 @@ public class GenericsKbBSTApp
 			switch (menuAns) 
 			{
 			case 1://Load data set we are using
-				System.out.print("\nEnter a file name: ");
+				System.out.print("\nEnter a file name (if returning user type \"UserDB.txt\" ): ");
 				keyboard.nextLine(); //throw away extra line
 				String fileName= keyboard.nextLine();
 				readFile(fileName);//code block
@@ -175,18 +175,34 @@ public class GenericsKbBSTApp
 		
 		
 		keyboard.close();
+		writeToFile(); //saving all this
 		String feedback= JOptionPane.showInputDialog("Please type any feedback you may have in the box below");
-		writeToFile(feedback); //if we need to save all this to files when we are done
+		writeToFile(feedback); //feedback
 		System.exit(0);
-	} //proper end?
+	} 
 	
 	public static void writeToFile(String F)
 	{
 		PrintWriter pw= null;
 		try 
 		{
-			pw = new PrintWriter(new FileOutputStream("GenericsKbBSTfeedback.txt", true)); //creates new file if doesnt exist
+			pw = new PrintWriter(new FileOutputStream("GenericsKbBSTfeedback.txt")); //creates new file if doesnt exist
 			pw.println(F); 
+			pw.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found");
+		}	
+	}
+	
+	public static void writeToFile()
+	{
+		PrintWriter pw= null;
+		try 
+		{
+			pw = new PrintWriter(new FileOutputStream("UserDB.txt", true)); //creates new file if doesnt exist
+			StringBuilder listItems = new StringBuilder();
+			String result = mainTree.traverseInorder(mainTree.getRoot(), listItems);
+			pw.print(result);
 			pw.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found");

@@ -4,6 +4,8 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 /**
  * Class with the main method to run the whole program 
  * but using an array to store the DB
@@ -98,12 +100,25 @@ public class GenericsKbArrayApp
 		PrintWriter pw= null;
 		try 
 		{
-			pw = new PrintWriter(new FileOutputStream("GenericsKB.txt", true)); //let user chose the file they used?
+			pw = new PrintWriter(new FileOutputStream("UserDB.txt", true)); //let user chose the file they used?
 			for (int j = 0; j < genericArr.length; j++)
 			{
 				pw.println(genericArr[j].toString()); //if not in file just write/add it to the end
 			}
 			 pw.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found");
+		}	
+	}
+	
+	public static void writeToFile(String F)
+	{
+		PrintWriter pw= null;
+		try 
+		{
+			pw = new PrintWriter(new FileOutputStream("GenericsKbBSTfeedback.txt")); //creates new file if doesnt exist
+			pw.println(F); 
+			pw.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found");
 		}	
@@ -175,7 +190,7 @@ public class GenericsKbArrayApp
 			switch (menuAns) 
 			{
 			case 1://Load data set we are using
-				System.out.print("\nEnter a file name: ");
+				System.out.print("\nEnter a file name (if returning user type \"UserDB.txt\" ): ");
 				keyboard.nextLine(); //throw away extra line
 				String fileName= keyboard.nextLine();
 				readFile(fileName);//code block
@@ -235,9 +250,11 @@ public class GenericsKbArrayApp
 			System.out.print("\nChoose an action from the menu:\n1. Load a knowledge base from a file\n2. Add a new statement to the knowledeg base\n3. Search for an item in the knowledge base by term\n4. Search for a item in the knowledge base by term and sentence\n5. Quit\nEnter your choice: ");
 			menuAns= keyboard.nextInt();
 		}
-		
-		
 		keyboard.close();
+		writeToFile(); //saving all this
+		String feedback= JOptionPane.showInputDialog("Please type any feedback you may have in the box below");
+		writeToFile(feedback); //feedback
+		System.exit(0);
 	}
 	
 

@@ -58,14 +58,16 @@ public class BinarySearchTreeKB
 	 * Gives the nodes of the tree in alphabetical order aka from lowest to highest
 	 * @param focus Node we are starting the traverse at - usually gonna be root
 	 */
-	public void traverseInorder(BSTNode<Generic> focus) //check for myself to make sure code is working
+	public String traverseInorder(BSTNode<Generic> focus, StringBuilder listItems) //check for myself to make sure code is working
 	{
 		if (focus!= null)
 		{
-			traverseInorder(focus.getLeft());
-			System.out.println(focus.toString());
-			traverseInorder(focus.getRight());
+			traverseInorder(focus.getLeft(), listItems);
+			listItems.append(focus.toString()).append("\n");
+			traverseInorder(focus.getRight(), listItems);
 		}
+		
+		return listItems.toString().trim(); // Trim removes trailing newline if present
 	}
 	
 	/**
