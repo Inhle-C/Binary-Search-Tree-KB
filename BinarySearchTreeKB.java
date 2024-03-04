@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class to create and store Binary Search trees
@@ -143,11 +145,54 @@ public class BinarySearchTreeKB
 
 	}
 
+
+	/**
+	 * Returns the root node
+	 * @return root node
+	 */
 	public BSTNode<Generic> getRoot() {
 		return root;
 	}
 
+
+	/**
+	 * Sets the root node
+	 * @param root root of the tree
+	 */
 	public void setRoot(BSTNode<Generic> root) {
 		this.root = root;
 	}
+
+	/**
+	 * Method to look for partial matches in the KB and return a list of all the matches
+	 * @param searchTerm The word we are looking for a partial match from
+	 * @return List of all the partial matches
+	 */
+	public List<BSTNode> searchPartial(String searchTerm) 
+	{	
+		
+		List<BSTNode> partialMatches = new ArrayList<BSTNode>();
+        searchPartial(searchTerm.toLowerCase(), getRoot(), partialMatches);
+        return partialMatches;
+
+	}
+	
+	/**
+	 * Assisting method in searchPartial(String searchTerm), and is used to
+	 * check if the current node's data contains the search term and recursively searching bothe trees
+	 * @param searchTerm The word we are looking for a partial match from
+	 * @param node The root of the tree
+	 * @param partialMatches Where the nodes of the partial matches will be stored
+	 */
+	private void searchPartial(String searchTerm, BSTNode node, List<BSTNode> partialMatches) {
+        if (node == null) 
+        {
+            return;
+        }
+        if (node.getData().getTerm().toLowerCase().contains(searchTerm)) {
+            partialMatches.add(node);
+        }
+        searchPartial(searchTerm, node.getLeft(), partialMatches);
+        searchPartial(searchTerm, node.getRight(), partialMatches);
+    }
 }

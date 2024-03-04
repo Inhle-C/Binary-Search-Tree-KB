@@ -1,4 +1,5 @@
 
+import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -96,7 +97,7 @@ public class GenericsKbBSTApp
 	public static void main(String[] args) 
 	{
 		Scanner keyboard= new Scanner(System.in);
-		System.out.print("Choose an action from the menu:\n1. Load a knowledge base from a file\n2. Add a new statement to the knowledeg base\n3. Search for an item in the knowledge base by term\n4. Search for a item in the knowledge base by term and sentence\n5. Quit\nEnter your choice: ");
+		System.out.print("Choose an action from the menu:\n1. Load a knowledge base from a file\n2. Add a new statement to the knowledeg base\n3. Search for an item in the knowledge base by term\n4. Search for a item in the knowledge base by term and sentence\n5. Quit\n6. Partial matches\nEnter your choice: ");
 		int menuAns= keyboard.nextInt();
 		
 		while (menuAns!=5)//while the answer isnt quit
@@ -164,12 +165,30 @@ public class GenericsKbBSTApp
 					System.out.println("Statement does not exist in the file");
 				
 					break;
+			case 6: //searching for an item with partial matches
+				System.out.print("\nEnter the term to search: ");
+				keyboard.nextLine(); //throw away extra line
+				String searchTerm6= keyboard.nextLine();
+				List<BSTNode> partiallist= mainTree.searchPartial(searchTerm6);
+				if (!partiallist.isEmpty())
+				{
+				 System.out.println("Partial matches found:");
+				 for (BSTNode bstNode : partiallist) 
+				 {
+					System.out.println(bstNode);
+				}
+				}
+				else
+					System.out.println("No partial matches");
+				
+					break;		
+			
 			default:
 				System.out.println("incorrect input");
 				break;
 			}
 			
-			System.out.print("\nChoose an action from the menu:\n1. Load a knowledge base from a file\n2. Add a new statement to the knowledeg base\n3. Search for an item in the knowledge base by term\n4. Search for a item in the knowledge base by term and sentence\n5. Quit\nEnter your choice: ");
+			System.out.print("\nChoose an action from the menu:\n1. Load a knowledge base from a file\n2. Add a new statement to the knowledeg base\n3. Search for an item in the knowledge base by term\n4. Search for a item in the knowledge base by term and sentence\n5. Quit\n6. Partial matches\nEnter your choice: ");
 			menuAns= keyboard.nextInt();
 		}
 		
