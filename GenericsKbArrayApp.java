@@ -101,7 +101,7 @@ public class GenericsKbArrayApp
 		try 
 		{
 			pw = new PrintWriter(new FileOutputStream("UserDB.txt", true)); //let user chose the file they used?
-			for (int j = 0; j < genericArr.length; j++)
+			for (int j = 0; j < len; j++)
 			{
 				pw.println(genericArr[j].toString()); //if not in file just write/add it to the end
 			}
